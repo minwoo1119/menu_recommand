@@ -1,8 +1,8 @@
 import './App.css';
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import MainPage from './common/MainPage/MainPage';
-import ErrorPage from './common/ErrorPage/ErrorPage';
+import MainPage from './components/MainPage/MainPage';
+import ErrorPage from './components/ErrorPage/ErrorPage';
 
 function App() {
 	return (
