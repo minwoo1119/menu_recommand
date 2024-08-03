@@ -1,9 +1,20 @@
 import './App.css';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import MainPage from './common/MainPage/MainPage';
+import ErrorPage from './common/ErrorPage/ErrorPage';
 
 function App() {
 	return (
 		<>
-			<h1>HI</h1>
+			<div className="App">
+				<BrowserRouter>
+					<Routes>
+						<Route path="/" element={<MainPage />}></Route>
+						<Route path="*" element={<ErrorPage />}></Route>
+					</Routes>
+				</BrowserRouter>
+			</div>
 		</>
 	);
 }
