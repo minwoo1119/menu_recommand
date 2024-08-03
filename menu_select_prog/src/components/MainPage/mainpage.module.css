@@ -1,0 +1,36 @@
+.container {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	height: 100vh;
+}
+
+.content {
+	width: 100%;
+}
+
+.randomRecommand {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.goRecommand {
+	padding: 2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.goRecommand > div {
+	margin: 1.4rem 0;
+}
+
+.contentTxt {
+	font-size: 2rem;
+	font-weight: bold;
+}
+
+.goRecommandBtn {
+}
