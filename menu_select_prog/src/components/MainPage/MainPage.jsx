@@ -1,6 +1,5 @@
 import SideBar from '../SideBar/SideBar';
 import styles from './mainpage.module.css';
-import Header from '../Header/Header';
 import RandomMenu from '../RandomMenu/RandomMenu';
 import { useNavigate } from 'react-router-dom';
 
