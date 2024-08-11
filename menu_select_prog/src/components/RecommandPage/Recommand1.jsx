@@ -1,6 +1,11 @@
 import styles from './recommand1.module.css';
+import { useNavigate } from 'react-router-dom';
 
 function Recommand1() {
+	const navigate = useNavigate();
+	const navigatePage2 = () => {
+		navigate('./page2');
+	};
 	return (
 		<div className={styles.container}>
 			<div className={styles.headcontainer}>
@@ -27,7 +32,9 @@ function Recommand1() {
 				</div>
 			</div>
 			<div className={styles.nextPage}>
-				<button className={styles.nextBtn}>건너뛰기(다음)</button>
+				<button onClick={navigatePage2} className={styles.nextBtn}>
+					다음
+				</button>
 			</div>
 		</div>
 	);
