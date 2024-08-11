@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 function Recommand1() {
 	const navigate = useNavigate();
-	const navigatePage2 = () => {
-		navigate('./page2');
+	const navigateNextPage = () => {
+		navigate('/recommand/page2');
 	};
 	return (
 		<div className={styles.container}>
@@ -32,7 +32,7 @@ function Recommand1() {
 				</div>
 			</div>
 			<div className={styles.nextPage}>
-				<button onClick={navigatePage2} className={styles.nextBtn}>
+				<button onClick={navigateNextPage} className={styles.nextBtn}>
 					다음
 				</button>
 			</div>
