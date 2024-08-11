@@ -1,10 +1,10 @@
 import styles from './recommand3.module.css';
 import { useNavigate } from 'react-router-dom';
 
-function Recommand3() {
+function Recommand4() {
 	const navigate = useNavigate();
 	const navigateNextPage = () => {
-		navigate('/recommand/page4');
+		navigate('/recommand/result');
 	};
 	return (
 		<div className={styles.container}>
@@ -19,11 +19,11 @@ function Recommand3() {
 			</div>
 			<div className={styles.nextPage}>
 				<button onClick={navigateNextPage} className={styles.nextBtn}>
-					다음
+					완료
 				</button>
 			</div>
 		</div>
 	);
 }
 
-export default Recommand3;
+export default Recommand4;

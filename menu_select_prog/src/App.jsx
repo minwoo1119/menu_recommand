@@ -7,6 +7,7 @@ import RecommandPage from './components/RecommandPage/RecommandPage';
 import Recommand1 from './components/RecommandPage/Recommand1';
 import Recommand2 from './components/RecommandPage/Recommand2';
 import Recommand3 from './components/RecommandPage/Recommand3';
+import Recommand4 from './components/RecommandPage/Recommand4';
 
 function App() {
 	return (
@@ -19,6 +20,7 @@ function App() {
 							<Route path="/recommand" element={<Recommand1 />}></Route>
 							<Route path="/recommand/page2" element={<Recommand2 />}></Route>
 							<Route path="/recommand/page3" element={<Recommand3 />}></Route>
+							<Route path="/recommand/page4" element={<Recommand4 />}></Route>
 						</Route>
 						<Route path="*" element={<ErrorPage />}></Route>
 					</Routes>
