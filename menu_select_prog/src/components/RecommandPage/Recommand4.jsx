@@ -9,9 +9,9 @@ function Recommand4() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.headcontainer}>
-				<div className={styles.headTxt}>최근에 먹은 음식을 알려주세요!</div>
+				<div className={styles.headTxt}>추가적인 요구사항을 입력해주세요!</div>
 				<div className={styles.subTxt}>
-					먹고싶지 않은 음식을 함께 입력해줘도 좋아요 :)
+					ex) 토마토를 못먹어서 토마토는 없었으면 좋겠어
 				</div>
 			</div>
 			<div className={styles.inputArea}>
