@@ -1,0 +1,52 @@
+.container {
+	margin: 2rem;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid black;
+	border-radius: 20px;
+}
+
+.headcontainer {
+	margin: 1.5rem 0;
+}
+
+.headTxt {
+	font-size: 2rem;
+	font-weight: 700;
+}
+
+.grid {
+	display: grid;
+	margin: 2rem;
+	grid-template-rows: 1fr 1fr;
+	grid-template-columns: 1fr 1fr;
+	gap: 3rem;
+}
+
+.img {
+	width: 20em;
+	height: 14em;
+	border-radius: 15px;
+	border: 1px solid black;
+}
+
+.lableTxt {
+	margin: 0.8rem 0.4rem;
+	font-size: 2rem;
+	font-weight: 700;
+}
+
+.nextPage {
+	margin: 2rem 0;
+}
+
+.nextBtn {
+	background-color: black;
+	padding: 1rem 2rem;
+	color: white;
+	border-radius: 15px;
+	font-size: 1rem;
+}
