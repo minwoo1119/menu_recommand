@@ -9,6 +9,12 @@
 	border-radius: 20px;
 }
 
+.headTxt {
+	font-size: 2rem;
+	font-weight: 700;
+	padding: 1rem;
+}
+
 .grid {
 	display: grid;
 	margin: 2rem;
@@ -29,12 +35,12 @@
 }
 
 .labelTxt {
-	font-size: 2rem;
+	font-size: 1.6rem;
 	font-weight: 600;
 }
 
 .icon {
-	font-size: 10rem;
+	font-size: 5rem;
 }
 .nextBtn {
 	background-color: black;
