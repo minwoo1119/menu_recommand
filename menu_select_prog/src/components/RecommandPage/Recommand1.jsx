@@ -1,11 +1,30 @@
+import { useContext } from 'react';
 import styles from './recommand1.module.css';
 import { useNavigate } from 'react-router-dom';
+import { SelectedCategoriesContext } from '../Selected/SelectedCategoriesContext';
 
 function Recommand1() {
 	const navigate = useNavigate();
+	const { selectedCategories, setSelectedCategories } = useContext(
+		SelectedCategoriesContext,
+	);
+
 	const navigateNextPage = () => {
 		navigate('/recommand/page2');
 	};
+
+	const handleSelection = (category) => {
+		if (selectedCategories.includes(category)) {
+			// 이미 선택된 경우, 선택 해제
+			setSelectedCategories(
+				selectedCategories.filter((item) => item !== category),
+			);
+		} else {
+			// 선택되지 않은 경우, 선택 추가
+			setSelectedCategories([...selectedCategories, category]);
+		}
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.headcontainer}>
@@ -14,19 +33,39 @@ function Recommand1() {
 				</div>
 			</div>
 			<div className={styles.grid}>
-				<div className={styles.koreanFood}>
+				<div
+					className={`${styles.koreanFood} ${
+						selectedCategories.includes('koreanFood') ? styles.selected : ''
+					}`}
+					onClick={() => handleSelection('koreanFood')}
+				>
 					<div className={styles.lableTxt}>한식</div>
 					<img className={styles.img} src="#" alt="" />
 				</div>
-				<div className={styles.chineseFood}>
+				<div
+					className={`${styles.chineseFood} ${
+						selectedCategories.includes('chineseFood') ? styles.selected : ''
+					}`}
+					onClick={() => handleSelection('chineseFood')}
+				>
 					<div className={styles.lableTxt}>중식</div>
 					<img className={styles.img} src="#" alt="" />
 				</div>
-				<div className={styles.italianFood}>
+				<div
+					className={`${styles.italianFood} ${
+						selectedCategories.includes('italianFood') ? styles.selected : ''
+					}`}
+					onClick={() => handleSelection('italianFood')}
+				>
 					<div className={styles.lableTxt}>양식</div>
 					<img className={styles.img} src="#" alt="" />
 				</div>
-				<div className={styles.japaneseFood}>
+				<div
+					className={`${styles.japaneseFood} ${
+						selectedCategories.includes('japaneseFood') ? styles.selected : ''
+					}`}
+					onClick={() => handleSelection('japaneseFood')}
+				>
 					<div className={styles.lableTxt}>일식</div>
 					<img className={styles.img} src="#" alt="" />
 				</div>
