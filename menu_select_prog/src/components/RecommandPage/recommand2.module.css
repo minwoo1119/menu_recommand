@@ -49,3 +49,8 @@
 	border-radius: 15px;
 	font-size: 1rem;
 }
+
+.selected {
+	background-color: coral;
+	border-radius: 20px;
+}
