@@ -10,7 +10,7 @@ function RecommandPage() {
 			</div>
 			<div className={styles.content}>
 				<div className={styles.headText}>Let's Choose !</div>
-				<div className={styles.subText}>조금 더 끌리는 걸 선택해주세요!</div>
+				{/* <div className={styles.subText}>조금 더 끌리는 걸 선택해주세요!</div> */}
 				<div className={styles.outlet}>
 					<Outlet />
 				</div>
