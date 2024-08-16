@@ -1,11 +1,22 @@
+import { useContext } from 'react';
 import styles from './recommand3.module.css';
 import { useNavigate } from 'react-router-dom';
+import { SelectedCategoriesContext } from '../Selected/SelectedCategoriesContext';
 
 function Recommand3() {
 	const navigate = useNavigate();
+	const { recentFoodInput, setRecentFoodInput } = useContext(
+		SelectedCategoriesContext,
+	);
+
 	const navigateNextPage = () => {
 		navigate('/recommand/page4');
 	};
+
+	const handleInputChange = (e) => {
+		setRecentFoodInput(e.target.value);
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.headcontainer}>
@@ -15,7 +26,12 @@ function Recommand3() {
 				</div>
 			</div>
 			<div className={styles.inputArea}>
-				<input className={styles.input} type="text" />
+				<input
+					className={styles.input}
+					type="text"
+					value={recentFoodInput}
+					onChange={handleInputChange}
+				/>
 			</div>
 			<div className={styles.nextPage}>
 				<button onClick={navigateNextPage} className={styles.nextBtn}>

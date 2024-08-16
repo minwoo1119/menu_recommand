@@ -1,11 +1,22 @@
-import styles from './recommand3.module.css';
+import { useContext } from 'react';
+import styles from './recommand4.module.css';
 import { useNavigate } from 'react-router-dom';
+import { SelectedCategoriesContext } from '../Selected/SelectedCategoriesContext';
 
 function Recommand4() {
 	const navigate = useNavigate();
+	const { additionalRequirements, setAdditionalRequirements } = useContext(
+		SelectedCategoriesContext,
+	);
+
 	const navigateNextPage = () => {
 		navigate('/recommand/result');
 	};
+
+	const handleInputChange = (e) => {
+		setAdditionalRequirements(e.target.value);
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.headcontainer}>
@@ -15,7 +26,12 @@ function Recommand4() {
 				</div>
 			</div>
 			<div className={styles.inputArea}>
-				<input className={styles.input} type="text" />
+				<input
+					className={styles.input}
+					type="text"
+					value={additionalRequirements}
+					onChange={handleInputChange}
+				/>
 			</div>
 			<div className={styles.nextPage}>
 				<button onClick={navigateNextPage} className={styles.nextBtn}>
