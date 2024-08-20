@@ -14,8 +14,16 @@ function Recommand2() {
 	};
 
 	const handleSelection = (spiceLevel) => {
-		// 단일 선택만 가능하도록 현재 선택된 항목으로 대체
-		setSelectedCategories([spiceLevel]);
+		// 선택된 항목이 이미 배열에 있는지 확인
+		if (selectedCategories.includes(spiceLevel)) {
+			// 이미 선택된 경우 선택 해제 (선택 해제하려면 아래 코드 추가)
+			setSelectedCategories(
+				selectedCategories.filter((category) => category !== spiceLevel),
+			);
+		} else {
+			// 기존 선택을 유지하면서 새로운 선택 추가
+			setSelectedCategories([...selectedCategories, spiceLevel]);
+		}
 	};
 
 	return (
