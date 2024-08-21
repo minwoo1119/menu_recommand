@@ -3,7 +3,8 @@ import { createContext, useState } from 'react';
 export const SelectedCategoriesContext = createContext();
 
 export const SelectedCategoriesProvider = ({ children }) => {
-	const [selectedCategories, setSelectedCategories] = useState([]);
+	const [selectedCategories, setSelectedCategories] = useState('');
+	const [selectedSpicy, setSelectedSpicy] = useState('');
 	const [recentFoodInput, setRecentFoodInput] = useState('');
 	const [additionalRequirements, setAdditionalRequirements] = useState('');
 
@@ -12,6 +13,8 @@ export const SelectedCategoriesProvider = ({ children }) => {
 			value={{
 				selectedCategories,
 				setSelectedCategories,
+				selectedSpicy,
+				setSelectedSpicy,
 				recentFoodInput,
 				setRecentFoodInput,
 				additionalRequirements,

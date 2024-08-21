@@ -5,7 +5,7 @@ import { SelectedCategoriesContext } from '../Selected/SelectedCategoriesContext
 
 function Recommand2() {
 	const navigate = useNavigate();
-	const { selectedCategories, setSelectedCategories } = useContext(
+	const { selectedSpicy, setSelectedSpicy } = useContext(
 		SelectedCategoriesContext,
 	);
 
@@ -14,16 +14,8 @@ function Recommand2() {
 	};
 
 	const handleSelection = (spiceLevel) => {
-		// 선택된 항목이 이미 배열에 있는지 확인
-		if (selectedCategories.includes(spiceLevel)) {
-			// 이미 선택된 경우 선택 해제 (선택 해제하려면 아래 코드 추가)
-			setSelectedCategories(
-				selectedCategories.filter((category) => category !== spiceLevel),
-			);
-		} else {
-			// 기존 선택을 유지하면서 새로운 선택 추가
-			setSelectedCategories([...selectedCategories, spiceLevel]);
-		}
+		// 선택된 항목을 새로운 항목으로 변경 (한 가지 선택만 가능하게)
+		setSelectedSpicy([spiceLevel]);
 	};
 
 	return (
@@ -34,7 +26,7 @@ function Recommand2() {
 			<div className={styles.grid}>
 				<div
 					className={`${styles.nospicy} ${
-						selectedCategories.includes('nospicy') ? styles.selected : ''
+						selectedSpicy.includes('nospicy') ? styles.selected : ''
 					}`}
 					onClick={() => handleSelection('nospicy')}
 				>
@@ -43,7 +35,7 @@ function Recommand2() {
 				</div>
 				<div
 					className={`${styles.littlespicy} ${
-						selectedCategories.includes('littlespicy') ? styles.selected : ''
+						selectedSpicy.includes('littlespicy') ? styles.selected : ''
 					}`}
 					onClick={() => handleSelection('littlespicy')}
 				>
@@ -52,7 +44,7 @@ function Recommand2() {
 				</div>
 				<div
 					className={`${styles.prettyspicy} ${
-						selectedCategories.includes('prettyspicy') ? styles.selected : ''
+						selectedSpicy.includes('prettyspicy') ? styles.selected : ''
 					}`}
 					onClick={() => handleSelection('prettyspicy')}
 				>
@@ -61,7 +53,7 @@ function Recommand2() {
 				</div>
 				<div
 					className={`${styles.amazingspicy} ${
-						selectedCategories.includes('amazingspicy') ? styles.selected : ''
+						selectedSpicy.includes('amazingspicy') ? styles.selected : ''
 					}`}
 					onClick={() => handleSelection('amazingspicy')}
 				>
