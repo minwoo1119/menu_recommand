@@ -1,9 +1,12 @@
 import styles from './sidebar.module.css';
+import { Link } from 'react-router-dom';
 
 function SideBar() {
 	return (
 		<div className={styles.container}>
-			<div className={styles.title}>What the Menu</div>
+			<div className={styles.title}>
+				<Link to="/">What the Menu</Link>
+			</div>
 			<div className={styles.sideTabs}>
 				<div>Home</div>
 				<div>Settings</div>
