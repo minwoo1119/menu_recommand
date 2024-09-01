@@ -15,13 +15,11 @@ function Recommand1() {
 
 	const handleSelection = (category) => {
 		if (selectedCategories.includes(category)) {
-			// 이미 선택된 경우, 선택 해제
-			setSelectedCategories(
-				selectedCategories.filter((item) => item !== category),
-			);
+			// 이미 선택된 경우, 선택 해제 (단일 선택이라면 의미가 없어짐)
+			setSelectedCategories([]);
 		} else {
-			// 선택되지 않은 경우, 선택 추가
-			setSelectedCategories([...selectedCategories, category]);
+			// 선택되지 않은 경우, 선택 추가 (단일 선택만 가능)
+			setSelectedCategories([category]);
 		}
 	};
 
