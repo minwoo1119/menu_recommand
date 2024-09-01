@@ -3,29 +3,27 @@ import { SelectedCategoriesContext } from '../Selected/SelectedCategoriesContext
 import { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
+import FoodCard from '../../common/foodCard/FoodCard';
 
 function Result() {
-	const [messages, setMessages] = useState([]);
 	const [responseText, setResponseText] = useState('');
 	const [loading, setLoading] = useState(false); // 로딩 상태 추가
+	const [resultFoods, setResultFoods] = useState([]); // 결과 음식 배열
 
 	const {
-		selectedCategories = [],
-		selectedSpicy = [],
+		selectedCategory,
+		selectedSpicy,
 		recentFoodInput,
 		additionalRequirements,
 	} = useContext(SelectedCategoriesContext);
 
-	// 문장을 생성하는 함수
-	const makeMessages = () => {
-		// selectedCategories와 selectedSpicy가 배열이 아닌 경우를 대비
-		const safeSelectedCategories = Array.isArray(selectedCategories)
-			? selectedCategories
-			: [];
-		const safeSelectedSpicy = Array.isArray(selectedSpicy) ? selectedSpicy : [];
+	const createMessage = () => {
+		const safeSelectedSpicy = Array.isArray(selectedSpicy)
+			? selectedSpicy
+			: ['nospicy']; // 기본값 설정
 
 		let userMessage =
-			'이러한 음식을 추천해줘, 음식이름만 콤마를 사용해서 구분하여 출력해줘\n';
+			'다음 조건에 해당하는 음식이름을 알려줘. 음식 이름만 알려주면 돼. 콤마를 사용해서 구분하여 3개만 출력해줘\n';
 
 		const categoryMap = {
 			chineseFood: '중식',
@@ -41,96 +39,98 @@ function Result() {
 			amazingspicy: '엄청나게 매운 정도',
 		};
 
-		const selectedCategoriesText = safeSelectedCategories
-			.map((category) => categoryMap[category])
-			.filter(Boolean)
-			.join(', ');
+		const selectedCategoryText = categoryMap[selectedCategory]; // 단일 카테고리 선택
 		const selectedSpicyText = safeSelectedSpicy
 			.map((spicy) => spicyMap[spicy])
 			.filter(Boolean)
 			.join(', ');
 
-		if (selectedCategoriesText)
-			userMessage += `음식 카테고리는 ${selectedCategoriesText}, `;
+		if (selectedCategoryText)
+			userMessage += `음식 카테고리는 ${selectedCategoryText}, `;
 		if (selectedSpicyText) userMessage += `맵기는 ${selectedSpicyText}, `;
 		if (recentFoodInput) userMessage += `${recentFoodInput}는 제외하고, `;
 		if (additionalRequirements)
 			userMessage += `추가 요구 사항은 ${additionalRequirements}, `;
 
-		// 마지막에 붙은 쉼표와 공백 제거
 		userMessage = userMessage.trim().replace(/,$/, '');
 
-		// messages 배열로 상태에 저장
-		setMessages([
+		return [
 			{ role: 'system', content: 'You are a helpful assistant.' },
 			{ role: 'user', content: userMessage },
-		]);
+		];
 	};
 
-	// 컴포넌트가 렌더링될 때 메시지를 생성
+	const fetchResponse = async () => {
+		const messages = createMessage();
+		setLoading(true);
+
+		try {
+			const response = await axios.post(
+				'https://api.openai.com/v1/chat/completions',
+				{
+					model: 'gpt-3.5-turbo',
+					messages: messages,
+					max_tokens: 150,
+					temperature: 0.7,
+				},
+				{
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
+					},
+				},
+			);
+
+			const responseText = response.data.choices[0].message.content.trim();
+			setResponseText(responseText);
+
+			// ','로 구분하고 공백을 없애서 배열에 저장
+			const foodsArray = responseText.split(',').map((food) => food.trim());
+			setResultFoods(foodsArray);
+		} catch (error) {
+			if (error.response && error.response.status === 429) {
+				setResponseText(
+					'너무 많은 요청이 발생했습니다. 나중에 다시 시도해 주세요.',
+				);
+			} else {
+				setResponseText('오류가 발생했습니다. 다시 시도해 주세요.');
+			}
+			console.error('Error:', error);
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	// 컴포넌트가 처음 렌더링될 때와 selectedCategory가 변경될 때 요청 실행
 	useEffect(() => {
-		makeMessages();
+		fetchResponse();
 	}, [
-		selectedCategories,
+		selectedCategory,
 		selectedSpicy,
 		recentFoodInput,
 		additionalRequirements,
 	]);
-
-	// ChatGPT API 호출
-	const fetchResponse = async (retryCount = 0) => {
-		if (messages.length > 0) {
-			setLoading(true); // 로딩 상태 시작
-			try {
-				// 일정 시간 지연 추가 (1초)
-				await new Promise((resolve) => setTimeout(resolve, 1000));
-
-				const response = await axios.post(
-					'https://api.openai.com/v1/chat/completions',
-					{
-						model: 'gpt-3.5-turbo',
-						messages: messages,
-						max_tokens: 150,
-						temperature: 0.7,
-					},
-					{
-						headers: {
-							'Content-Type': 'application/json',
-							Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
-						},
-					},
-				);
-
-				setResponseText(response.data.choices[0].message.content.trim());
-			} catch (error) {
-				if (error.response && error.response.status === 429) {
-					// 429 오류 발생 시 백오프 전략 적용
-					const delay = Math.pow(2, retryCount) * 1000; // 지연 시간 계산 (2의 제곱으로 증가)
-					console.warn(`429 오류 발생, ${delay / 1000}초 후 재시도`);
-					setTimeout(() => fetchResponse(retryCount + 1), delay);
-				} else {
-					setResponseText('오류가 발생했습니다. 다시 시도해 주세요.');
-					console.error('Error:', error);
-				}
-			} finally {
-				setLoading(false); // 로딩 상태 종료
-			}
-		}
-	};
-
-	// messages가 변경될 때 fetchResponse 호출
-	useEffect(() => {
-		fetchResponse();
-	}, [messages]);
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>결과</div>
 			<div className={styles.subText}>이런 음식들은 어떠세요?</div>
 			{loading ? (
-				<CircularProgress /> // 로딩 상태일 때 CircularProgress 표시
+				<CircularProgress />
 			) : (
-				<h2>요청 결과: {responseText}</h2>
+				<div className={styles.outputs}>
+					<h2>요청 결과: {responseText}</h2>
+					<div className={styles.foodcarts}>
+						{resultFoods.map((food, index) => (
+							<FoodCard
+								key={index}
+								foodName={food}
+								foodImg={index}
+								description={index}
+							/>
+						))}
+					</div>
+				</div>
 			)}
 		</div>
 	);
