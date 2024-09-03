@@ -23,7 +23,7 @@ function Result() {
 			: ['nospicy']; // 기본값 설정
 
 		let userMessage =
-			'다음 조건에 해당하는 음식이름을 알려줘. 음식 이름만 알려주면 돼. 콤마를 사용해서 구분하여 3개만 출력해줘\n';
+			'다음 조건에 해당하는 음식이름을 알려줘. 음식 이름만 볶음밥, 닭갈비, 불고기 처럼 출력해주면 돼. 콤마를 사용해서 구분하여 3개만 출력해줘\n';
 
 		const categoryMap = {
 			chineseFood: '중식',
@@ -119,15 +119,11 @@ function Result() {
 				<CircularProgress />
 			) : (
 				<div className={styles.outputs}>
-					<h2>요청 결과: {responseText}</h2>
+					{/* <h2>문장 : {userMessage}</h2> */}
+					{/* <h2>요청 결과: {responseText}</h2> */}
 					<div className={styles.foodcarts}>
 						{resultFoods.map((food, index) => (
-							<FoodCard
-								key={index}
-								foodName={food}
-								foodImg={index}
-								description={index}
-							/>
+							<FoodCard key={index} foodName={food} />
 						))}
 					</div>
 				</div>
