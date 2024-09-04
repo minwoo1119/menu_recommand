@@ -1,14 +1,33 @@
 .container {
-	border: 2px solid black;
+	border: 2px solid gray;
 	padding: 2rem;
 	margin: 1.6rem;
 	border-radius: 2em;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	background-color: whitesmoke;
 }
 
 .img {
 	width: 10em;
 	height: 10em;
+	object-fit: contain;
+	margin: 1em 0;
+}
+
+.img > img {
+	width: 10em;
+	height: 10em;
+}
+
+.foodName {
+	font-size: 2rem;
+	font-weight: 700;
+	padding: 0.6em 0;
+}
+
+.emptybox {
+	border-top: 1px solid black;
+	padding-bottom: 1em;
 }
