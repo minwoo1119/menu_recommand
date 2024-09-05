@@ -4,7 +4,6 @@ function RandomMenu(props) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.foodName}>{props.name}</div>
-			<div className={styles.emptybox}></div>
 			<div className={styles.img}>
 				<img src={props.imgUrl} alt="" />
 			</div>
