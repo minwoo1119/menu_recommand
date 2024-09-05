@@ -46,12 +46,13 @@ function Result() {
 			.join(', ');
 
 		if (selectedCategoryText)
-			userMessage += `음식 카테고리는 ${selectedCategoryText}, `;
+			userMessage += `음식 종류는 ${selectedCategoryText}, `;
 		if (selectedSpicyText) userMessage += `맵기는 ${selectedSpicyText}, `;
 		if (recentFoodInput) userMessage += `${recentFoodInput}는 제외하고, `;
 		if (additionalRequirements)
 			userMessage += `추가 요구 사항은 ${additionalRequirements}, `;
 
+		console.log(userMessage);
 		userMessage = userMessage.trim().replace(/,$/, '');
 
 		return [
@@ -68,7 +69,7 @@ function Result() {
 			const response = await axios.post(
 				'https://api.openai.com/v1/chat/completions',
 				{
-					model: 'gpt-3.5-turbo',
+					model: 'gpt-4o',
 					messages: messages,
 					max_tokens: 150,
 					temperature: 0.7,

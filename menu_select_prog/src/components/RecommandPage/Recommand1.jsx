@@ -5,7 +5,7 @@ import { SelectedCategoriesContext } from '../Selected/SelectedCategoriesContext
 
 function Recommand1() {
 	const navigate = useNavigate();
-	const { selectedCategories, setSelectedCategories } = useContext(
+	const { selectedCategory, setSelectedCategory } = useContext(
 		SelectedCategoriesContext,
 	);
 
@@ -14,12 +14,12 @@ function Recommand1() {
 	};
 
 	const handleSelection = (category) => {
-		if (selectedCategories.includes(category)) {
+		if (selectedCategory.includes(category)) {
 			// 이미 선택된 경우, 선택 해제 (단일 선택이라면 의미가 없어짐)
-			setSelectedCategories([]);
+			setSelectedCategory([]);
 		} else {
 			// 선택되지 않은 경우, 선택 추가 (단일 선택만 가능)
-			setSelectedCategories([category]);
+			setSelectedCategory([category]);
 		}
 	};
 
@@ -33,7 +33,7 @@ function Recommand1() {
 			<div className={styles.grid}>
 				<div
 					className={`${styles.koreanFood} ${
-						selectedCategories.includes('koreanFood') ? styles.selected : ''
+						selectedCategory.includes('koreanFood') ? styles.selected : ''
 					}`}
 					onClick={() => handleSelection('koreanFood')}
 				>
@@ -42,7 +42,7 @@ function Recommand1() {
 				</div>
 				<div
 					className={`${styles.chineseFood} ${
-						selectedCategories.includes('chineseFood') ? styles.selected : ''
+						selectedCategory.includes('chineseFood') ? styles.selected : ''
 					}`}
 					onClick={() => handleSelection('chineseFood')}
 				>
@@ -51,7 +51,7 @@ function Recommand1() {
 				</div>
 				<div
 					className={`${styles.italianFood} ${
-						selectedCategories.includes('italianFood') ? styles.selected : ''
+						selectedCategory.includes('italianFood') ? styles.selected : ''
 					}`}
 					onClick={() => handleSelection('italianFood')}
 				>
@@ -60,7 +60,7 @@ function Recommand1() {
 				</div>
 				<div
 					className={`${styles.japaneseFood} ${
-						selectedCategories.includes('japaneseFood') ? styles.selected : ''
+						selectedCategory.includes('japaneseFood') ? styles.selected : ''
 					}`}
 					onClick={() => handleSelection('japaneseFood')}
 				>

@@ -3,7 +3,7 @@ import { createContext, useState } from 'react';
 export const SelectedCategoriesContext = createContext();
 
 export const SelectedCategoriesProvider = ({ children }) => {
-	const [selectedCategories, setSelectedCategories] = useState('');
+	const [selectedCategory, setSelectedCategory] = useState('koreanFood'); // 기본값을 'koreanFood'로 설정
 	const [selectedSpicy, setSelectedSpicy] = useState('');
 	const [recentFoodInput, setRecentFoodInput] = useState('');
 	const [additionalRequirements, setAdditionalRequirements] = useState('');
@@ -11,8 +11,8 @@ export const SelectedCategoriesProvider = ({ children }) => {
 	return (
 		<SelectedCategoriesContext.Provider
 			value={{
-				selectedCategories,
-				setSelectedCategories,
+				selectedCategory,
+				setSelectedCategory,
 				selectedSpicy,
 				setSelectedSpicy,
 				recentFoodInput,
