@@ -7,12 +7,7 @@ function SideBar() {
 			<div className={styles.title}>
 				<Link to="/">What the Menu</Link>
 			</div>
-			<div className={styles.sideTabs}>
-				<div>Home</div>
-				<div>Settings</div>
-				<div>Favorites</div>
-			</div>
-			<div className={styles.profile}>Profile</div>
+			<div className={styles.profile}>Made by Minwoo</div>
 		</div>
 	);
 }
